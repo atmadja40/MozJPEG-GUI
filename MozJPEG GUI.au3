@@ -27,7 +27,7 @@ $AppWindow = GUICreate( 'MozJPEG GUI', 257, 257, 192, 124, -1, $WS_EX_ACCEPTFILE
 GUISetOnEvent( $GUI_EVENT_DROPPED, 'DropHandle' )
 GUISetOnEvent( $GUI_EVENT_CLOSE, 'AppWindowClose' )
 
-global $quality = 90
+global $quality = 80
 global $DropZoneLabelTxt = 'Drop files here'
 global $thisDir = SlashPath( @ScriptDir )
 
@@ -143,7 +143,7 @@ Func DropHandle( $hWnd, $msgID, $wParam, $lParam )
 	GUICtrlSetData( $DropZone, '' )
 	GUICtrlSetData( $DropZoneLabel, $DropZoneLabelTxt )
 	GUICtrlSetData( $Output, '' )
-	
+
 	For $path In $paths
 		If IsDir( $path ) or not IsAllowedFile( $path ) then
 			ContinueLoop
@@ -156,6 +156,6 @@ Func DropHandle( $hWnd, $msgID, $wParam, $lParam )
 
 	For $file in $files
 		$p = PathInfo( $file )
-		Run( @ComSpec & " /c " & $run & '"' & $file & '"' & ' > ' & '"' & $p[1] & $p[2] & 'moz-' & $quality & '-' & $p[3] & '.jpg"' )
+		Run( @ComSpec & " /c " & $run & '"' & $file & '"' & ' > ' & '"' & $p[1] & $p[2] & $p[3] & '_comp.jpg"' )
 	Next
 EndFunc
